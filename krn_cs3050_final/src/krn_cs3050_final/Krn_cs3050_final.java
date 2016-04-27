@@ -33,6 +33,7 @@ public class Krn_cs3050_final extends Application {
     public static void main(String[] args) {
         launch(args);
         System.out.println("I am Nathan Slayer or Wrolds");
+        System.out.println("This is from the branch.");
     }
     
 }
