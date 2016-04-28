@@ -19,3 +19,12 @@
 .text {
   -fx-text-fill: #FFFFFF;
 }
+
+.text-field {
+    -fx-text-fill: #FFFFFF;
+}
+
+.content {
+    -fx-background-color:  #476481;
+    -fx-background-radius: 0px;
+}
