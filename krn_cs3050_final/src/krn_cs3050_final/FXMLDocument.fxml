@@ -7,24 +7,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="krn_cs3050_final.FXMLDocumentController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="600.0" style="-fx-background-color: #2c3e50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="krn_cs3050_final.FXMLDocumentController">
    <children>
-      <TextField layoutX="258.0" layoutY="105.0" />
-      <TextField layoutX="258.0" layoutY="162.0" />
-      <Label layoutX="138.0" layoutY="110.0" text="Number of Days:" />
-      <Label layoutX="228.0" layoutY="168.0" text="R:" />
-      <Button layoutX="334.0" layoutY="216.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" text="Run" />
-      <Text layoutX="180.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CS3050 Final Project">
+      <TextField layoutX="312.0" layoutY="105.0" />
+      <TextField layoutX="312.0" layoutY="166.0" />
+      <Label layoutX="143.0" layoutY="107.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px;" text="Number of Days:" />
+      <Label layoutX="274.0" layoutY="168.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px;" text="R:" />
+      <Button layoutX="355.0" layoutY="216.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Run" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
+         </font></Button>
+      <Text fill="WHITE" layoutX="120.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CS3050 Final Project">
+         <font>
+            <Font size="36.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Kynan Justis, Ryon Siebel, and Nathan Stahl">
+      <Text fill="WHITE" layoutX="14.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 18px;" text="By Kynan Justis, Ryon Siebel, and Nathan Stahl">
          <font>
             <Font size="12.0" />
          </font>
       </Text>
-      <Button layoutX="189.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="50.0" prefWidth="91.0" text="Open File" />
-      <TextArea fx:id="outputArea" editable="false" layoutX="15.0" layoutY="290.0" prefHeight="363.0" prefWidth="570.0" />
+      <Button layoutX="120.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Open File" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextArea fx:id="outputArea" editable="false" layoutX="120.0" layoutY="290.0" prefHeight="245.0" prefWidth="359.0" />
    </children>
 </AnchorPane>

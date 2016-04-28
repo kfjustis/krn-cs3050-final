@@ -22,7 +22,7 @@ public class Krn_cs3050_final extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        
+        scene.getStylesheets().add(Krn_cs3050_final.class.getResource("user_interface.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

@@ -1,0 +1,21 @@
+.button {
+  -fx-background-color: #27ae60;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 14pt;
+  -fx-font-family: sans-serif;
+  -fx-border-radius: 20px;
+  -fx-width: 150px;
+  -fx-height: 50px;
+}
+
+.root {
+  -fx-background-color: #34495e;
+}
+
+.label {
+  -fx-text-fill: #FFFFFF;
+}
+
+.text {
+  -fx-text-fill: #FFFFFF;
+}
