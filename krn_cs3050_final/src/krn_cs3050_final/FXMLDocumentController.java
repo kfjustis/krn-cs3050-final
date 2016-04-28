@@ -5,20 +5,17 @@
  */
 package krn_cs3050_final;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -37,6 +34,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TextArea outputArea;
+    
+    @FXML
+    private TextField numDaysField;
+    
+    @FXML
+    private TextField rField;
     
     private ArrayList<Integer> priceList;
     
@@ -57,10 +60,10 @@ public class FXMLDocumentController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new ExtensionFilter("TXT files (*.txt)","*.txt"));
         
+        // Get input from file
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             try {
-                // Open scanner
                 Scanner scanner = new Scanner(file);
                 
                 // Add prices from file
@@ -69,8 +72,7 @@ public class FXMLDocumentController implements Initializable {
                     // before adding something to the pricelist
                     priceList.add(scanner.nextInt());
                 }
-
-                // Close scanner
+                
                 scanner.close();
 
                 // Test printing the ArrayList
@@ -92,17 +94,25 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void handleRun(ActionEvent event)
     {
-        if(priceList == null)
+        Integer numDays, rAmount;
+        
+        if(priceList.isEmpty()) // was if priceList == null
         {
             outputArea.setText("Please choose a correctly formatted file first!");
         }
         else
         {
-            outputArea.setText("We hit the run button\n");
-            strat = Stock_Sorter.sortStocks(6, 1, priceList);
+            // Set the values from TextFields
+            numDays = Integer.parseInt(numDaysField.getText());
+            rAmount = Integer.parseInt(rField.getText());
             
-            outputArea.appendText("we Clicked Run and got through SortStocks!\n");
+            // Build final output from sorting
+            strat = Stock_Sorter.sortStocks(numDays.intValue(), rAmount.intValue(), priceList);
             
+            // Clear area before displaying
+            outputArea.setText("");
+            
+            // Display final output in TextArea
             for(int count = 0; count < strat.size(); count++)
             {
                 outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
