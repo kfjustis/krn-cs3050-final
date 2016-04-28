@@ -5,12 +5,24 @@
  */
 package krn_cs3050_final;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 /**
  *
@@ -19,17 +31,59 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private AnchorPane root;
+
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    private TextArea outputArea;
+    
+    private ArrayList<Integer> priceList;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
     
+    @FXML
+    public void handleOpen(ActionEvent event) {
+        Stage stage = (Stage)root.getScene().getWindow();
+        priceList = new ArrayList<>();
+        
+        // Clear the TextArea
+        outputArea.setText("");
+        
+        // Create FileChoopser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("TXT files (*.txt)","*.txt"));
+        
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            try {
+                // Open scanner
+                Scanner scanner = new Scanner(file);
+                
+                // Add prices from file
+                while (scanner.hasNextInt()) {
+                    // may need to have cases here to check the values of nextInt()
+                    // before adding something to the pricelist
+                    priceList.add(scanner.nextInt());
+                }
+
+                // Close scanner
+                scanner.close();
+
+                // Test printing the ArrayList
+                for (Integer i: priceList) {
+                    System.out.println(i);
+                    outputArea.appendText(i + "\n");
+                }
+                
+                // Print error message if no data was read in
+                if (priceList.isEmpty()) {
+                    outputArea.setText("Could not output numbers. Invalid data from file.");
+                }
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

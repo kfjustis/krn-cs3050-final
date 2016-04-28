@@ -7,24 +7,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="krn_cs3050_final.FXMLDocumentController">
    <children>
       <TextField layoutX="258.0" layoutY="105.0" />
       <TextField layoutX="258.0" layoutY="162.0" />
       <Label layoutX="138.0" layoutY="110.0" text="Number of Days:" />
       <Label layoutX="228.0" layoutY="168.0" text="R:" />
-      <Button layoutX="335.0" layoutY="256.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" text="Run" />
+      <Button layoutX="334.0" layoutY="216.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" text="Run" />
       <Text layoutX="180.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CS3050 Final Project">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Kynan Justis, Ryon Siebel, and Nathan Stahl">
+      <Text layoutX="14.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Kynan Justis, Ryon Siebel, and Nathan Stahl">
          <font>
             <Font size="12.0" />
          </font>
       </Text>
-      <Button layoutX="190.0" layoutY="256.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" text="Open File" />
+      <Button layoutX="189.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="50.0" prefWidth="91.0" text="Open File" />
+      <TextArea fx:id="outputArea" editable="false" layoutX="15.0" layoutY="290.0" prefHeight="363.0" prefWidth="570.0" />
    </children>
 </AnchorPane>
