@@ -30,6 +30,8 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
     
+    private ArrayList<Prospect> strat = new ArrayList<Prospect>();
+    
     @FXML
     private AnchorPane root;
 
@@ -83,6 +85,27 @@ public class FXMLDocumentController implements Initializable {
                 }
             } catch(IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+    
+    @FXML
+    public void handleRun(ActionEvent event)
+    {
+        if(priceList == null)
+        {
+            outputArea.setText("Please choose a correctly formatted file first!");
+        }
+        else
+        {
+            outputArea.setText("We hit the run button\n");
+            strat = Stock_Sorter.sortStocks(6, 1, priceList);
+            
+            outputArea.appendText("we Clicked Run and got through SortStocks!\n");
+            
+            for(int count = 0; count < strat.size(); count++)
+            {
+                outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
             }
         }
     }
