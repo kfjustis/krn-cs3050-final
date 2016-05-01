@@ -84,8 +84,8 @@ public abstract class Stock_Sorter
            for(int count = 0; count < growthPeriods.size()-1; count++)
            {
                int currentEndPrice = prices.get(growthPeriods.get(count).getEnd()-1);
-               int nextStartPrice = prices.get(growthPeriods.get(count).getStart()-1);
-               int nextEndPrice = prices.get(growthPeriods.get(count).getEnd()-1);
+               int nextStartPrice = prices.get(growthPeriods.get(count+1).getStart()-1);
+               int nextEndPrice = prices.get(growthPeriods.get(count+1).getEnd()-1);
                
                if(currentEndPrice <= nextEndPrice)//make sure im not losing profit of of combining and not selling sooner
                {
