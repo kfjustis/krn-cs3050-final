@@ -14,6 +14,8 @@ import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -64,26 +66,73 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             try {
-                Scanner scanner = new Scanner(file);
+                
+                // Check for invalid characters
+                Scanner scanner1 = new Scanner(file);
+                Boolean hadParseError = false;
+                while (scanner1.hasNext()) {
+                    String line = scanner1.next();
+                    
+                    System.out.print("Printing line: ");
+                    System.out.println(line);
+                    
+                    // Letters
+                    for (char ch : line.toCharArray()) {
+                        System.out.println(ch);
+                        if (Character.isLetter(ch)) {
+                            Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Error");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Could not parse file due to invalid character(s)!");
+                            alert.showAndWait();
+                            
+                            hadParseError = true;
+                        }
+                    }
+                }
+                scanner1.close();
                 
                 // Add prices from file
-                while (scanner.hasNextInt()) {
+                Scanner scanner2 = new Scanner(file);
+                while (scanner2.hasNextInt()) {
                     // may need to have cases here to check the values of nextInt()
                     // before adding something to the pricelist
-                    priceList.add(scanner.nextInt());
+                    Integer currentNum = scanner2.nextInt();
+                    if (currentNum > 0) {
+                        priceList.add(currentNum);
+                    } else {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Could not parse file due to price with improper sign!");
+                        alert.showAndWait();
+                        
+                        hadParseError = true;
+                    }
                 }
-                
-                scanner.close();
+                scanner2.close();
 
-                // Test printing the ArrayList
-                for (Integer i: priceList) {
-                    System.out.println(i);
-                    outputArea.appendText(i + "\n");
+                // Show prices from data read in no errors
+                if (!hadParseError) {
+                    System.out.println();
+                    for (Integer i: priceList) {
+                        System.out.println(i);
+                        outputArea.appendText(i + "\n");
+                    }
+                } else {
+                    outputArea.setText("Could not load prices due to parsing error.\n"
+                            + "Please load a different file.");
                 }
                 
                 // Print error message if no data was read in
                 if (priceList.isEmpty()) {
-                    outputArea.setText("Could not output numbers. Invalid data from file.");
+                    // Show error
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("No prices available. Please load file "
+                                         + "with proper input.");
+                    alert.showAndWait();
                 }
             } catch(IOException e) {
                 e.printStackTrace();
@@ -96,12 +145,59 @@ public class FXMLDocumentController implements Initializable {
     {
         Integer numDays, rAmount;
         
-        if(priceList.isEmpty()) // was if priceList == null
+        // Check values in numDays and R fields for being integers
+        try {
+            Integer.parseInt(numDaysField.getText());
+            Integer.parseInt(rField.getText());
+        } catch (NumberFormatException e) {
+            // Show error
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Number of Days and R must be integers!");
+            alert.showAndWait();
+        }
+        
+        if (priceList == null) {
+            // Show error
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No prices available. Please load file "
+                                 + "with proper input.");
+            alert.showAndWait();
+        }
+        else if(priceList.isEmpty()) // was if priceList == null
         {
-            outputArea.setText("Please choose a correctly formatted file first!");
+            // Show error
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No prices available. Please load file "
+                                 + "with proper input.");
+            alert.showAndWait();
+        }
+        else if (Integer.parseInt(numDaysField.getText()) != priceList.size())
+        {
+            // Show error if numDays is wrong
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Number of days does not match input!");
+            alert.showAndWait();
+        }
+        else if (Integer.parseInt(rField.getText()) < 1)
+        {
+            // Show error if R is less than 1
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("R must be at least 1.");
+            alert.showAndWait();
+            
         }
         else
-        {
+        {   
             // Set the values from TextFields
             numDays = Integer.parseInt(numDaysField.getText());
             rAmount = Integer.parseInt(rField.getText());
@@ -113,9 +209,18 @@ public class FXMLDocumentController implements Initializable {
             outputArea.setText("");
             
             // Display final output in TextArea
-            for(int count = 0; count < strat.size(); count++)
-            {
-                outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
+            if (strat.size() > 0) {
+                for(int count = 0; count < strat.size(); count++)
+                {
+                    outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
+                }
+            } else {
+                // Show error
+                Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Output Warning");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Program determined never to buy or sell!");
+                            alert.showAndWait();
             }
         }
     }

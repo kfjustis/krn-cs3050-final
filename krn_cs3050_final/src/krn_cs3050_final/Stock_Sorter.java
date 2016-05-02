@@ -15,22 +15,11 @@ public abstract class Stock_Sorter
 {
     public static ArrayList<Prospect> sortStocks(int numDays, int transactions, ArrayList<Integer> prices)
     {
-        //int numDays = 6;//NUMBER OF DAYS SHOULD BE GIVEN BY USER
-        //int transactions = 1;//NUMBER OF TIMES STOCKS CAN BE BOUGHT AND SOLD SHOULD BE GIVEN BY USER
-        /*ArrayList<Integer> prices = new ArrayList<Integer>()//MY INPUT FILE SHOULD BE GIVEN BY USER
-        {{
-            add(1);
-            add(3);
-            add(4);
-            add(6);
-            add(2);
-            add(10);
-        }};*/
         Boolean increasing = false;
         ArrayList<Prospect> growthPeriods = new ArrayList<>();
        
         //Create complete list of periods of growth
-       for(int count = 0; count < numDays; count++)//dont create a condition for start but one for end to make sure you dont go out of the array list
+       for(int count = 0; count < numDays; count++) //dont create a condition for start but one for end to make sure you dont go out of the array list
        {
            //if we are at the last day we have a price for
            if(count+1 == numDays)
