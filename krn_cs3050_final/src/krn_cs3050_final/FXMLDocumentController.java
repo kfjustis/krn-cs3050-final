@@ -164,89 +164,89 @@ public class FXMLDocumentController implements Initializable {
         try {
             Integer.parseInt(numDaysField.getText());
             Integer.parseInt(rField.getText());
+            
+            //Check to ensure values in numDays and R fields are positive
+            if(Integer.parseInt(numDaysField.getText()) <= 0 || Integer.parseInt(rField.getText()) <= 0) {
+                //Display error message
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("The values for number of days and R must be positive!");
+                alert.showAndWait();
+            }
+
+            if (priceList == null) {
+                // Show error
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("No prices available. Please load file "
+                                     + "with proper input.");
+                alert.showAndWait();
+            }
+            else if(priceList.isEmpty()) // was if priceList == null
+            {
+                // Show error
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("No prices available. Please load file "
+                                     + "with proper input.");
+                alert.showAndWait();
+            }
+            else if (Integer.parseInt(numDaysField.getText()) != priceList.size())
+            {
+                // Show error if numDays is wrong
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Number of days does not match input!");
+                alert.showAndWait();
+            }
+            else if (Integer.parseInt(rField.getText()) < 1)
+            {
+                // Show error if R is less than 1
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("R must be at least 1.");
+                alert.showAndWait();
+
+            }
+            else
+            {   
+                // Set the values from TextFields
+                numDays = Integer.parseInt(numDaysField.getText());
+                rAmount = Integer.parseInt(rField.getText());
+
+                // Build final output from sorting
+                strat = Stock_Sorter.sortStocks(numDays.intValue(), rAmount.intValue(), priceList);
+
+                // Clear area before displaying
+                outputArea.setText("");
+
+                // Display final output in TextArea
+                if (strat.size() > 0) {
+                    for(int count = 0; count < strat.size(); count++)
+                    {
+                        outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
+                    }
+                } else {
+                    // Show error
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("Output Warning");
+                                alert.setHeaderText(null);
+                                alert.setContentText("Program determined never to buy or sell!");
+                                alert.showAndWait();
+                }
+            }
         } catch (NumberFormatException e) {
             // Show error
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Number of Days and R must be integers!");
+            alert.setContentText("Number of Days and R must be positive integers!");
             alert.showAndWait();
-        }
-        
-        //Check to ensure values in numDays and R fields are positive
-        if(Integer.parseInt(numDaysField.getText()) <= 0 || Integer.parseInt(rField.getText()) <= 0) {
-            //Display error message
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("The values for number of days and R must be positive!");
-            alert.showAndWait();
-        }
-        
-        if (priceList == null) {
-            // Show error
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("No prices available. Please load file "
-                                 + "with proper input.");
-            alert.showAndWait();
-        }
-        else if(priceList.isEmpty()) // was if priceList == null
-        {
-            // Show error
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("No prices available. Please load file "
-                                 + "with proper input.");
-            alert.showAndWait();
-        }
-        else if (Integer.parseInt(numDaysField.getText()) != priceList.size())
-        {
-            // Show error if numDays is wrong
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Number of days does not match input!");
-            alert.showAndWait();
-        }
-        else if (Integer.parseInt(rField.getText()) < 1)
-        {
-            // Show error if R is less than 1
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("R must be at least 1.");
-            alert.showAndWait();
-            
-        }
-        else
-        {   
-            // Set the values from TextFields
-            numDays = Integer.parseInt(numDaysField.getText());
-            rAmount = Integer.parseInt(rField.getText());
-            
-            // Build final output from sorting
-            strat = Stock_Sorter.sortStocks(numDays.intValue(), rAmount.intValue(), priceList);
-            
-            // Clear area before displaying
-            outputArea.setText("");
-            
-            // Display final output in TextArea
-            if (strat.size() > 0) {
-                for(int count = 0; count < strat.size(); count++)
-                {
-                    outputArea.appendText(strat.get(count).getStart() + "\n" + strat.get(count).getEnd() + "\n");
-                }
-            } else {
-                // Show error
-                Alert alert = new Alert(AlertType.INFORMATION);
-                            alert.setTitle("Output Warning");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Program determined never to buy or sell!");
-                            alert.showAndWait();
-            }
         }
     }
 }
