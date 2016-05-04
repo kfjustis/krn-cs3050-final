@@ -141,6 +141,20 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
+    public void handleClear(ActionEvent event) {
+        outputArea.clear();
+    }
+    
+    @FXML
+    public void handlePrices(ActionEvent event) {
+        if(priceList != null) {
+            for(Integer i : priceList) {
+                outputArea.appendText(i + "\n");
+            }
+        }
+    }
+    
+    @FXML
     public void handleRun(ActionEvent event)
     {
         Integer numDays, rAmount;
@@ -155,6 +169,16 @@ public class FXMLDocumentController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Number of Days and R must be integers!");
+            alert.showAndWait();
+        }
+        
+        //Check to ensure values in numDays and R fields are positive
+        if(Integer.parseInt(numDaysField.getText()) <= 0 || Integer.parseInt(rField.getText()) <= 0) {
+            //Display error message
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("The values for number of days and R must be positive!");
             alert.showAndWait();
         }
         
