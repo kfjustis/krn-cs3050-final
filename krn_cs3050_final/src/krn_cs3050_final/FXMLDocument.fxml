@@ -13,7 +13,7 @@
       <TextField fx:id="rField" layoutX="300.0" layoutY="178.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: #476481;" />
       <Label layoutX="143.0" layoutY="119.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px;" text="Number of Days:" />
       <Label layoutX="265.0" layoutY="180.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px;" text="R:" />
-      <Button layoutX="430.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleRun" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Run" textFill="WHITE">
+      <Button layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleRun" prefHeight="45.0" prefWidth="85.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Run" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font></Button>
@@ -27,7 +27,7 @@
             <Font size="12.0" />
          </font>
       </Text>
-      <Button layoutX="100.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Open File" textFill="WHITE">
+      <Button layoutX="100.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleOpen" prefHeight="45.0" prefWidth="85.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Open File" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font></Button>
@@ -36,12 +36,12 @@
             <String fx:value="text-field" />
             <String fx:value="content" />
          </styleClass></TextArea>
-      <Button layoutX="312.0" layoutY="236.0" mnemonicParsing="false" onAction="#handlePrices" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Prices" textFill="WHITE">
+      <Button layoutX="310.0" layoutY="236.0" mnemonicParsing="false" onAction="#handlePrices" prefHeight="45.0" prefWidth="85.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Prices" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button layoutX="204.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Clear" textFill="WHITE">
+      <Button layoutX="205.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="45.0" prefWidth="85.0" style="-fx-background-color: #27ae60; -fx-background-radius: 20;" text="Clear" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>
