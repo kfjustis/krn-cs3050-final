@@ -51,10 +51,12 @@ public abstract class Stock_Sorter
        }
        
        //Test print of origonal list
+       /*
        for(int i = 0; i < growthPeriods.size(); i++)
        {
            System.out.println(" Start date: " +growthPeriods.get(i).getStart() + " End date: " + growthPeriods.get(i).getEnd() + " Growth: " + growthPeriods.get(i).getIncrease());
        }
+       */
        
        //I now have my list of all possible increase periods I must now decrease the values
        //go through the array list of growth periods and combine the days where the price from the height of one ends with
@@ -127,11 +129,13 @@ public abstract class Stock_Sorter
        }
        
        //Test print of new
+       /*
        System.out.println("\n\n After Removing\n");
        for(int i = 0; i < growthPeriods.size(); i++)
        {
            System.out.println(" Start date: " +growthPeriods.get(i).getStart() + " End date: " + growthPeriods.get(i).getEnd() + " Growth: " + growthPeriods.get(i).getIncrease());
        }
+       */
        return(growthPeriods);
     }
 }

@@ -73,12 +73,12 @@ public class FXMLDocumentController implements Initializable {
                 while (scanner1.hasNext()) {
                     String line = scanner1.next();
                     
-                    System.out.print("Printing line: ");
-                    System.out.println(line);
+                    //System.out.print("Printing line: ");
+                    //System.out.println(line);
                     
                     // Letters
                     for (char ch : line.toCharArray()) {
-                        System.out.println(ch);
+                        //System.out.println(ch);
                         if (Character.isLetter(ch)) {
                             Alert alert = new Alert(AlertType.INFORMATION);
                             alert.setTitle("Error");
@@ -114,9 +114,9 @@ public class FXMLDocumentController implements Initializable {
 
                 // Show prices from data read in no errors
                 if (!hadParseError) {
-                    System.out.println();
+                    //System.out.println();
                     for (Integer i: priceList) {
-                        System.out.println(i);
+                        //System.out.println(i);
                         outputArea.appendText(i + "\n");
                     }
                 } else {
@@ -148,6 +148,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void handlePrices(ActionEvent event) {
         if(priceList != null) {
+            outputArea.clear();
             for(Integer i : priceList) {
                 outputArea.appendText(i + "\n");
             }
